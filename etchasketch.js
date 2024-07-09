@@ -1,19 +1,18 @@
-const GRIDSIDE = 600;
-const rows = 16;
-const columns =16;
-
-const container = document.querySelector('#container');
-container.style.width = `${GRIDSIDE}px`;
-container.style.height = `${GRIDSIDE}px`;
-
-function createGridCell (){
-    for(let i = 0; i < (rows * columns); i++){
-    const gridCell = document.createElement("div");
-    gridCell.style.width = `${(GRIDSIDE/columns)-2}px`;
-    gridCell.style.height = `${(GRIDSIDE/rows)-2}px`;
-    gridCell.classList.add("cell");
-    container.appendChild(gridCell);
-    }
+function populateBoard(size){
+  let board = document.getElementById('board'); // Get the element by ID
+  let squares = board.querySelectorAll('div');
+  squares.forEach(div => div.remove());
+board.style.gridTemplateColumns = `repeat(${size} , 1fr)`;
+board.style.gridTemplateRows = `repeat(${size} , 1fr)`;
+let amount = size*size
+for (let i = 0; i < amount; i++) {
+  let square = document.createElement('div');
+  square.style.backgroundColor = 'grey'; // Add quotes around the color
+  board.appendChild(square); // Use appendChild for simplicity
 }
+}
+populateBoard(16);
 
-createGridCell();
+function changeSize(input){
+  populateBoard(input);
+}
